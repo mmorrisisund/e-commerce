@@ -7,7 +7,7 @@ const petSchema = new Schema({
   type: { ...requiredString, enum: ['dog', 'cat'] },
   dob: { type: Date, required: true },
   description: requiredString,
-  sex: { type: Boolean, required: true, enum: ['male', 'female'] },
+  sex: { ...requiredString, enum: ['male', 'female'] },
   spayed: Boolean,
   breed: requiredString,
   created: { type: Date, default: Date.now, immutable: true },
