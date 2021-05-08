@@ -1,20 +1,24 @@
 {
-  "name": "e-commerce",
+  "name": "pawsitive-pals",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "concurrently \"npm run start:dev --prefix server\" \"npm start --prefix client\" "
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mmorrisisund/e-commerce.git"
+    "url": "git+https://github.com/mmorrisisund/pawsitive-pals.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mmorrisisund/e-commerce/issues"
+    "url": "https://github.com/mmorrisisund/pawsitive-pals/issues"
   },
-  "homepage": "https://github.com/mmorrisisund/e-commerce#readme"
+  "homepage": "https://github.com/mmorrisisund/pawsitive-pals#readme",
+  "dependencies": {
+    "concurrently": "^6.0.2"
+  }
 }
