@@ -1,11 +1,23 @@
-var express = require('express')
-var path = require('path')
-var cookieParser = require('cookie-parser')
-var logger = require('morgan')
+const path = require('path')
+
+const cookieParser = require('cookie-parser')
+const dotenv = require('dotenv')
+const express = require('express')
+const logger = require('morgan')
+const mongoose = require('mongoose')
 
 const createApiRoutes = require('./api')
+const errorHandler = require('./middleware/errorHandler')
 
-var app = express()
+dotenv.config()
+const app = express()
+const db = mongoose
+  .connect(process.env.MONGODB_URI, {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log('Connected to MongoDb...'))
 
 app.use(logger('dev'))
 app.use(express.json())
@@ -14,5 +26,7 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
 createApiRoutes(app)
+
+app.use(errorHandler)
 
 module.exports = app
