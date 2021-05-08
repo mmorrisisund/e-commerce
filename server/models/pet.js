@@ -11,6 +11,7 @@ const petSchema = new Schema({
   spayed: Boolean,
   breed: requiredString,
   created: { type: Date, default: Date.now, immutable: true },
+  image: String,
 })
 
 module.exports = model('Pet', petSchema)

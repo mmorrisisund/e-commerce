@@ -8,4 +8,5 @@ module.exports = Joi.object({
   sex: Joi.any().valid('male', 'female').required(),
   spayed: Joi.boolean().optional(),
   breed: Joi.string().required(),
+  image: Joi.string().uri().optional(),
 })
