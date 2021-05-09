@@ -1,8 +1,10 @@
+const { ObjectId } = require('mongoose').Schema.Types
 const Pet = require('../../models/pet')
+const User = require('../../models/user')
 const catchAsync = require('../../utils/catchAsync')
 
 exports.addPet = catchAsync(async (req, res) => {
-  const pet = new Pet(req.body)
+  const pet = new Pet({ ...req.body, owner: req.state.userId })
   await pet.save()
 
   res.json({ status: 'success', data: { pet } })
@@ -32,19 +34,22 @@ exports.getAllPets = catchAsync(async (req, res) => {
 
 exports.updatePet = catchAsync(async (req, res) => {
   const { id, ...rest } = req.body
-  const pet = await Pet.findByIdAndUpdate(id, { ...rest })
+  const query = { _id: id, owner: req.state.userId }
+  const pet = await Pet.findOneAndUpdate(query, rest, { new: true })
 
-  if (pet) {
-    const updatedPet = { ...pet._doc, ...rest }
-    res.json({ status: 'success', data: { pet: updatedPet } })
-  } else {
-    res.json({ status: 'fail', data: { message: 'Error updating pet.' } })
+  if (!pet) {
+    return res.json({
+      status: 'fail',
+      data: { message: 'Error updating pet.' },
+    })
   }
+  res.json({ status: 'success', data: { pet } })
 })
 
 exports.deletePet = catchAsync(async (req, res) => {
   const { id } = req.body
-  const pet = await Pet.findByIdAndDelete(id)
+  const query = { _id: id, owner: req.state.userId }
+  const pet = await Pet.findOneAndDelete(query)
 
   if (pet) {
     res.json({ status: 'success', data: null })

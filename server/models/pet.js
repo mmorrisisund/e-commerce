@@ -12,6 +12,7 @@ const petSchema = new Schema({
   breed: requiredString,
   created: { type: Date, default: Date.now, immutable: true },
   image: String,
+  owner: { type: Schema.Types.ObjectId, ref: 'User', required: true },
 })
 
 module.exports = model('Pet', petSchema)
