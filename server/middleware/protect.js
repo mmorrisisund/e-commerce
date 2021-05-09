@@ -10,7 +10,11 @@ module.exports = async (req, res, next) => {
     })
   }
 
-  const userId = jwt.verify(token, process.env.JWT_SECRET)
-  req.state = { userId }
-  next()
+  try {
+    const userId = jwt.verify(token, process.env.JWT_SECRET)
+    req.state = { userId }
+    next()
+  } catch (error) {
+    res.json({ status: 'fail', data: { message: 'Token is invalid' } })
+  }
 }
