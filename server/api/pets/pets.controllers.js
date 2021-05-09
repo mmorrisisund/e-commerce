@@ -19,6 +19,17 @@ exports.getPet = catchAsync(async (req, res) => {
   }
 })
 
+exports.getAllPets = catchAsync(async (req, res) => {
+  const page = req.body.page ?? 1
+  const pageSize = req.body.pageSize ?? 10
+
+  const pets = await Pet.find({})
+    .limit(pageSize)
+    .skip((page - 1) * pageSize)
+
+  res.json({ status: 'success', data: { pets } })
+})
+
 exports.updatePet = catchAsync(async (req, res) => {
   const { id, ...rest } = req.body
   const pet = await Pet.findByIdAndUpdate(id, { ...rest })
