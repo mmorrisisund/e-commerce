@@ -9,15 +9,16 @@ const {
   updatePet,
   deletePet,
 } = require('./pets.controllers')
+const protect = require('../../middleware/protect')
 
 module.exports = Router => {
   router = new Router()
 
-  router.post('/add', validate(addPetSchema), addPet)
+  router.post('/add', protect, validate(addPetSchema), addPet)
   router.post('/single', getPet)
   router.post('/all', validate(allPetsSchema), getAllPets)
-  router.post('/update', validate(updatePetSchema), updatePet)
-  router.post('/delete', deletePet)
+  router.post('/update', protect, validate(updatePetSchema), updatePet)
+  router.post('/delete', protect, deletePet)
 
   return { prefix: '/pets', router }
 }
