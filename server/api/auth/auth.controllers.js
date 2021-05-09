@@ -44,7 +44,7 @@ exports.login = catchAsync(async (req, res) => {
     return res.json({ status: 'fail', data: { password: 'Invalid password' } })
   }
 
-  token = generateToken(user._id)
+  token = generateToken(user._id.toString())
   res.cookie('token', token, { httpOnly: true, sameSite: true, secure: !isDev })
   res.json({ status: 'success', data: null })
 })
