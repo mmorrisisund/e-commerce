@@ -11,6 +11,6 @@ module.exports = async (req, res, next) => {
   }
 
   const userId = jwt.verify(token, process.env.JWT_SECRET)
-  req = { state: { userId } }
+  req.state = { userId }
   next()
 }
