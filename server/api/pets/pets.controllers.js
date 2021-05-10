@@ -1,7 +1,7 @@
 const { ObjectId } = require('mongoose').Schema.Types
 const Pet = require('../../models/pet')
 const catchAsync = require('../../utils/catchAsync')
-const { getCoords } = require('../../utils/location')
+const { getCoords, getLocation } = require('../../utils/location')
 
 exports.addPet = catchAsync(async (req, res) => {
   let { location } = req.body
@@ -28,7 +28,14 @@ exports.getPet = catchAsync(async (req, res) => {
   const pet = await Pet.findById(id)
 
   if (pet) {
-    res.json({ status: 'success', data: { pet } })
+    let name
+    if (pet.location?.coordinates) {
+      name = await getLocation(pet.location.coordinates)
+    }
+    res.json({
+      status: 'success',
+      data: { pet: { ...pet.toJSON(), location: name } },
+    })
   } else {
     res.json({ status: 'fail', data: { message: 'Pet not found' } })
   }
@@ -41,6 +48,7 @@ exports.getAllPets = catchAsync(async (req, res) => {
   const pets = await Pet.find({})
     .limit(pageSize)
     .skip((page - 1) * pageSize)
+    .lean()
 
   res.json({ status: 'success', data: { pets } })
 })
