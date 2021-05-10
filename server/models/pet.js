@@ -13,6 +13,11 @@ const petSchema = new Schema({
   created: { type: Date, default: Date.now, immutable: true },
   image: String,
   owner: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  location: {
+    type: { type: String, enum: ['Point'] },
+    coordinates: { type: [Number] },
+  },
 })
+petSchema.index({ location: '2dsphere' })
 
 module.exports = model('Pet', petSchema)

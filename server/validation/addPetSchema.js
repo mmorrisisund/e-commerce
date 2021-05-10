@@ -9,4 +9,5 @@ module.exports = Joi.object({
   spayed: Joi.boolean().optional(),
   breed: Joi.string().required(),
   image: Joi.string().uri().optional(),
+  location: Joi.string().optional(),
 })

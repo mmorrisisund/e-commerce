@@ -1,10 +1,23 @@
 const { ObjectId } = require('mongoose').Schema.Types
 const Pet = require('../../models/pet')
-const User = require('../../models/user')
 const catchAsync = require('../../utils/catchAsync')
+const { getCoords } = require('../../utils/location')
 
 exports.addPet = catchAsync(async (req, res) => {
-  const pet = new Pet({ ...req.body, owner: req.state.userId })
+  let { location } = req.body
+  if (location) {
+    const coords = await getCoords(location)
+    if (coords) {
+      location = {
+        type: 'Point',
+        coordinates: [coords.lng, coords.lat],
+      }
+    } else {
+      location = undefined
+    }
+  }
+
+  const pet = new Pet({ ...req.body, owner: req.state.userId, location })
   await pet.save()
 
   res.json({ status: 'success', data: { pet } })
@@ -33,9 +46,25 @@ exports.getAllPets = catchAsync(async (req, res) => {
 })
 
 exports.updatePet = catchAsync(async (req, res) => {
+  let { location } = req.body
+  if (location) {
+    const coords = await getCoords(location)
+    if (coords) {
+      location = {
+        type: 'Point',
+        coordinates: [coords.lng, coords.lat],
+      }
+    } else {
+      location = undefined
+    }
+  }
   const { id, ...rest } = req.body
   const query = { _id: id, owner: req.state.userId }
-  const pet = await Pet.findOneAndUpdate(query, rest, { new: true })
+  const pet = await Pet.findOneAndUpdate(
+    query,
+    { ...rest, location },
+    { new: true }
+  )
 
   if (!pet) {
     return res.json({
