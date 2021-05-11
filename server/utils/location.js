@@ -35,11 +35,12 @@ exports.getLocation = async coords => {
         .filter(
           component =>
             component.types.includes('administrative_area_level_1') ||
-            component.types.includes('administrative_area_level_3')
+            component.types.includes('locality')
         )
         .map(component => component.short_name)
         .join(', ')
     }
+    return ''
   } catch (error) {
     console.log(error.response.data.message)
   }
