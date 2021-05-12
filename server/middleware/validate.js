@@ -7,7 +7,11 @@ module.exports = schema => (req, res, next) => {
     const { details } = error
     const message = details.map(i => i.message).join('\n')
 
-    return res.json({ status: 'fail', data: { message } })
+    if (process.env.NODE_ENV === 'development') {
+      return res.json({ status: 'fail', data: { error } })
+    } else {
+      return res.json({ status: 'fail', data: { message } })
+    }
   }
   next()
 }
