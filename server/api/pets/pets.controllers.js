@@ -42,15 +42,18 @@ exports.getPet = catchAsync(async (req, res) => {
 })
 
 exports.getAllPets = catchAsync(async (req, res) => {
-  const page = req.body.page ?? 1
-  const pageSize = req.body.pageSize ?? 10
+  try {
+    const features = new APIFeatures(Pet.find(), req.query)
+      .filter()
+      .sort()
+      .limitFields()
+      .paginate()
+    const pets = await features.query
 
-  const pets = await Pet.find({})
-    .limit(pageSize)
-    .skip((page - 1) * pageSize)
-    .lean()
-
-  res.json({ status: 'success', data: { pets } })
+    res.json({ status: 'success', data: { pets } })
+  } catch (error) {
+    res.json({ status: 'fail', data: { message: error } })
+  }
 })
 
 exports.updatePet = catchAsync(async (req, res) => {
