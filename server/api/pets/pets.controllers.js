@@ -2,6 +2,7 @@ const { ObjectId } = require('mongoose').Schema.Types
 const Pet = require('../../models/pet')
 const catchAsync = require('../../utils/catchAsync')
 const { getCoords, getLocation } = require('../../utils/location')
+const APIFeatures = require('../../utils/apiFeatures')
 
 exports.addPet = catchAsync(async (req, res) => {
   let { location } = req.body
@@ -50,7 +51,7 @@ exports.getAllPets = catchAsync(async (req, res) => {
       .paginate()
     const pets = await features.query
 
-    res.json({ status: 'success', data: { pets } })
+    res.json({ status: 'success', data: { pets, results: pets.length } })
   } catch (error) {
     res.json({ status: 'fail', data: { message: error } })
   }
