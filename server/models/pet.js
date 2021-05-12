@@ -22,6 +22,10 @@ const petSchema = new Schema({
 
 petSchema.index({ location: '2dsphere' })
 
+petSchema.pre(/^find/, async function (next) {
+  this.options.limit = Math.min(this.options.limit ?? 100, 100)
+})
+
 petSchema.post('find', async function (res, next) {
   const promises = res.map(pet => {
     if (pet.location?.type) {
