@@ -14,7 +14,7 @@ exports.getCoords = async location => {
       return data.results[0].geometry.location
     }
   } catch (error) {
-    console.log(error.response.data.message)
+    console.log(error.response.data.error_message)
   }
 }
 
@@ -42,6 +42,6 @@ exports.getLocation = async coords => {
     }
     return ''
   } catch (error) {
-    console.log(error.response.data.message)
+    console.log(error.response.data.error_message)
   }
 }
