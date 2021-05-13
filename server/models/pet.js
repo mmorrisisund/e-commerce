@@ -1,6 +1,11 @@
 const { Schema, model } = require('mongoose')
 const { getLocation } = require('../utils/location')
 
+const DOG_AVATAR =
+  'https://res.cloudinary.com/mimo/image/upload/v1620876885/pawsitive-pals/dog_avatar.png'
+const CAT_AVATAR =
+  'https://res.cloudinary.com/mimo/image/upload/v1620876881/pawsitive-pals/cat_avatar.png'
+
 const requiredString = { type: String, required: true }
 
 const petSchema = new Schema({
@@ -12,7 +17,12 @@ const petSchema = new Schema({
   spayed: Boolean,
   breed: requiredString,
   created: { type: Date, default: Date.now, immutable: true },
-  image: String,
+  image: {
+    type: String,
+    default: function () {
+      return this.type === 'dog' ? DOG_AVATAR : CAT_AVATAR
+    },
+  },
   owner: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   location: {
     type: { type: String, enum: ['Point'] },
