@@ -44,7 +44,7 @@ exports.getPet = catchAsync(async (req, res) => {
 
 exports.getAllPets = catchAsync(async (req, res) => {
   try {
-    const features = new APIFeatures(Pet.find(), req.query)
+    const features = new APIFeatures(Pet.find(), req.body)
       .filter()
       .sort()
       .limitFields()
