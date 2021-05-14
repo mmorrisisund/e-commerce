@@ -4,6 +4,7 @@ const User = require('../../models/user')
 const Password = require('../../models/password')
 const catchAsync = require('../../utils/catchAsync')
 const generateToken = require('../../utils/generateToken')
+const { generateSignature } = require('../../utils/cloudinary')
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -52,4 +53,16 @@ exports.login = catchAsync(async (req, res) => {
 exports.logout = (req, res) => {
   res.clearCookie('token')
   res.json({ status: 'success', data: null })
+}
+
+exports.getCloudinarySignature = (req, res) => {
+  const { folder } = req.body
+
+  try {
+    const { timestamp, signature } = generateSignature(folder)
+    res.json({ status: 'success', data: { timestamp, signature } })
+  } catch (error) {
+    console.log(`error`, error)
+    res.json({ status: 'fail', data: { message: 'Error generating token' } })
+  }
 }
