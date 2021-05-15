@@ -55,6 +55,13 @@ exports.logout = (req, res) => {
   res.json({ status: 'success', data: null })
 }
 
+exports.getUser = catchAsync(async (req, res) => {
+  const { userId } = req.state
+  const user = await User.findById(userId)
+
+  res.json({ status: 'success', data: { user } })
+})
+
 exports.getCloudinarySignature = (req, res) => {
   const { folder } = req.body
 

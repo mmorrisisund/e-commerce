@@ -7,11 +7,14 @@ const {
   login,
   logout,
   getCloudinarySignature,
+  getUser,
 } = require('./auth.controllers')
+const protect = require('../../middleware/protect')
 
 module.exports = Router => {
   const router = new Router()
 
+  router.post('/me', protect, getUser)
   router.post('/signup', validate(signupSchema), signUp)
   router.post('/login', validate(loginSchema), login)
   router.post('/logout', logout)
