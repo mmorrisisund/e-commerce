@@ -1,8 +1,10 @@
 const path = require('path')
 
 const cookieParser = require('cookie-parser')
+const cors = require('cors')
 const dotenv = require('dotenv')
 const express = require('express')
+const helmet = require('helmet')
 const logger = require('morgan')
 const mongoose = require('mongoose')
 
@@ -21,6 +23,8 @@ const db = mongoose
   .then(() => console.log('Connected to MongoDb...'))
 
 app.use(logger('dev'))
+app.use(helmet())
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
