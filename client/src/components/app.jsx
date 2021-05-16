@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
 import AuthProvider from '../context/authContext'
+import AppShell from './AppShell'
 
 const client = new QueryClient()
 const Home = lazy(() => import('../pages/Home'))
@@ -12,9 +13,11 @@ const App = () => (
     <Router>
       <QueryClientProvider client={client}>
         <AuthProvider>
-          <Switch>
-            <Route path='/' component={Home} />
-          </Switch>
+          <AppShell>
+            <Switch>
+              <Route exact path='/' component={Home} />
+            </Switch>
+          </AppShell>
         </AuthProvider>
       </QueryClientProvider>
     </Router>
