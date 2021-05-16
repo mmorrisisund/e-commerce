@@ -1,44 +1,24 @@
+import { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import AuthProvider, { useAuth } from '../context/authContext'
-import { useState } from 'react'
+
+import AuthProvider from '../context/authContext'
 
 const client = new QueryClient()
+const Home = lazy(() => import('../pages/Home'))
 
 const App = () => (
-  <Router>
-    <QueryClientProvider client={client}>
-      <AuthProvider>
-        <Switch>
-          <Route path='/' component={Test} />
-        </Switch>
-      </AuthProvider>
-    </QueryClientProvider>
-  </Router>
+  <Suspense fallback={<p>Loading...</p>}>
+    <Router>
+      <QueryClientProvider client={client}>
+        <AuthProvider>
+          <Switch>
+            <Route path='/' component={Home} />
+          </Switch>
+        </AuthProvider>
+      </QueryClientProvider>
+    </Router>
+  </Suspense>
 )
 
 export default App
-
-const Test = () => {
-  const { isAuthenticated, login, logout } = useAuth()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-
-  return (
-    <div>
-      <h1>{isAuthenticated ? 'yes' : 'no'}</h1>
-      <button onClick={() => login(email, password)}>login</button>
-      <input
-        placeholder='email'
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-      />
-      <input
-        placeholder='password'
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-      />
-      <button onClick={() => logout()}>logout</button>
-    </div>
-  )
-}
