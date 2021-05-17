@@ -8,9 +8,11 @@ const LoginForm = () => {
   const { register, handleSubmit } = useForm()
   const { login, error } = useAuth()
 
+  const onSubmit = data => login(data)
+
   return (
     <form
-      onSubmit={handleSubmit(login)}
+      onSubmit={handleSubmit(onSubmit)}
       className='bg-white rounded-md shadow-md max-w-4xl mx-auto p-4'
     >
       <div className='flex flex-col items-center'>
@@ -20,7 +22,11 @@ const LoginForm = () => {
 
         <h1 className='text-green-800 text-2xl mt-8'>Login</h1>
 
-        {error && <div>error</div>}
+        {error && (
+          <div className='w-full sm:w-1/2 border-2 border-red-700 bg-red-300 text-red-900 p-2 rounded mt-4 text-center'>
+            {error}
+          </div>
+        )}
 
         <div className='mt-8 w-full sm:w-1/2'>
           <div className='space-y-4'>
