@@ -20,7 +20,7 @@ const AuthProvider = ({ children }) => {
     getUser()
   }, [])
 
-  const login = async (email, password) => {
+  const login = async ({ email, password }) => {
     try {
       const user = await loginUser(email, password)
       setUser(user)
