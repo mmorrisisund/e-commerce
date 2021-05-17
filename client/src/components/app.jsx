@@ -7,6 +7,7 @@ import AppShell from './AppShell'
 
 const client = new QueryClient()
 const Home = lazy(() => import('../pages/Home'))
+const Login = lazy(() => import('../pages/Login'))
 
 const App = () => (
   <Suspense fallback={<p>Loading...</p>}>
@@ -16,6 +17,7 @@ const App = () => (
           <AppShell>
             <Switch>
               <Route exact path='/' component={Home} />
+              <Route path='/login' component={Login} />
             </Switch>
           </AppShell>
         </AuthProvider>
