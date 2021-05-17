@@ -36,13 +36,13 @@ exports.login = catchAsync(async (req, res) => {
   if (!user) {
     return res.json({
       status: 'fail',
-      data: { email: 'Email address not found' },
+      data: { message: 'Email address not found' },
     })
   }
 
   const isValid = await bcrypt.compare(password, user.password.password)
   if (!isValid) {
-    return res.json({ status: 'fail', data: { password: 'Invalid password' } })
+    return res.json({ status: 'fail', data: { message: 'Invalid password' } })
   }
 
   token = generateToken(user._id.toString())
