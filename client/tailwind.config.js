@@ -16,6 +16,7 @@ module.exports = {
       },
       fontFamily: {
         pacifico: 'Pacifico',
+        sans: 'Recursive ' + defaultTheme.fontFamily.sans,
       },
     },
   },
