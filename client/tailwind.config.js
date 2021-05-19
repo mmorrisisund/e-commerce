@@ -18,6 +18,9 @@ module.exports = {
         pacifico: 'Pacifico',
         sans: 'Recursive ' + defaultTheme.fontFamily.sans,
       },
+      inset: {
+        badge: 'calc(50% - 48px)',
+      },
     },
   },
   variants: {
