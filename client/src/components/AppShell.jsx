@@ -1,3 +1,4 @@
+import Footer from './Footer'
 import { Navbar } from './Navbar'
 
 const AppShell = ({ children }) => {
@@ -5,6 +6,7 @@ const AppShell = ({ children }) => {
     <>
       <Navbar />
       {children}
+      <Footer />
     </>
   )
 }
