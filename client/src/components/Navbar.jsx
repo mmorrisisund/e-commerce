@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import cn from '../../utils/class-names'
-import Logo from '../Logo'
-import { ReactComponent as PawIcon } from '../../assets/images/logo.svg'
-import Overlay from '../shared/Overlay'
-import { useAuth } from '../../context/authContext'
+import cn from '../utils/class-names'
+import Logo from './Logo'
+import { ReactComponent as PawIcon } from '../assets/images/logo.svg'
+import Overlay from './shared/Overlay'
+import { useAuth } from '../context/authContext'
 
 export const Navbar = () => {
   const [show, setShow] = useState(false)
