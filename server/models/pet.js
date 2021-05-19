@@ -2,9 +2,9 @@ const { Schema, model } = require('mongoose')
 const { getLocation } = require('../utils/location')
 
 const DOG_AVATAR =
-  'https://res.cloudinary.com/mimo/image/upload/v1620876885/pawsitive-pals/dog_avatar.png'
+  'https://res.cloudinary.com/mimo/image/upload/v1620876885/pawsitive-pals/avatars/dog_avatar.png'
 const CAT_AVATAR =
-  'https://res.cloudinary.com/mimo/image/upload/v1620876881/pawsitive-pals/cat_avatar.png'
+  'https://res.cloudinary.com/mimo/image/upload/v1620876881/pawsitive-pals/avatars/cat_avatar.png'
 
 const requiredString = { type: String, required: true }
 
