@@ -90,6 +90,7 @@ const Home = () => {
             headline='Dog Articles'
             text='Lorem, ipsum dolor sit amet consectetur adipisicing elit.
             Veritatis culpa repellendus commodi aut adipisci. Eos?'
+            to='/articles/dogs'
           />
         </div>
         <div className='max-w-lg mx-auto lg:w-1/2'>
@@ -99,6 +100,7 @@ const Home = () => {
             headline='Cat Articles'
             text='Lorem, ipsum dolor sit amet consectetur adipisicing elit.
             Veritatis culpa repellendus commodi aut adipisci. Eos?'
+            to='/articles/cats'
           />
         </div>
       </section>
