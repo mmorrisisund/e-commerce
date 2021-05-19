@@ -2,7 +2,7 @@ import cn from '../../utils/class-names'
 
 const VARIANT = {
   primary: [
-    'bg-green-800 text-green-50',
+    'bg-green-800 text-green-50 border-2 border-transparent',
     'active:focus:bg-green-800 active:focus:text-green-50',
     'hover:bg-green-50 hover:text-green-800',
     'focus:outline-none',
@@ -25,7 +25,7 @@ const Button = ({ children, variant = 'primary', size = 'md', ...rest }) => {
   return (
     <button
       {...rest}
-      className={cn('rounded transition-colors ', SIZE[size], VARIANT[variant])}
+      className={cn('rounded transition-colors', SIZE[size], VARIANT[variant])}
     >
       {children}
     </button>
