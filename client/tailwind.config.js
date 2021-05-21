@@ -11,9 +11,10 @@ module.exports = {
       ...defaultTheme.screens,
     },
     extend: {
-      backgroundImage: {
-        hero: 'url("./assets/images/banner.png")',
+      colors: {
+        glass: 'rgba(255,255,255,.35)',
       },
+
       fontFamily: {
         pacifico: 'Pacifico',
         sans: 'Recursive ' + defaultTheme.fontFamily.sans,
