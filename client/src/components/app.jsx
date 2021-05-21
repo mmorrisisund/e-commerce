@@ -9,6 +9,7 @@ const client = new QueryClient()
 const Home = lazy(() => import('../pages/Home'))
 const Login = lazy(() => import('../pages/Login'))
 const Logout = lazy(() => import('../pages/Logout'))
+const Signup = lazy(() => import('../pages/Signup'))
 
 const App = () => (
   <Suspense fallback={<p>Loading...</p>}>
@@ -20,6 +21,7 @@ const App = () => (
               <Route exact path='/' component={Home} />
               <Route path='/login' component={Login} />
               <Route path='/logout' component={Logout} />
+              <Route path='/signup' component={Signup} />
             </Switch>
           </AppShell>
         </AuthProvider>
