@@ -26,7 +26,7 @@ const LoginForm = () => {
         </h1>
 
         {error && (
-          <div className='w-full p-2 mt-4 text-center text-red-900 bg-red-300 border-2 border-red-700 rounded sm:w-1/2'>
+          <div className='w-full p-2 mt-4 text-center text-red-900 bg-red-300 border-2 border-red-700 rounded'>
             {error}
           </div>
         )}
