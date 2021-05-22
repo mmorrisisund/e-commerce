@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom'
+
+import { useAuth } from '../context/authContext'
 import banner from '../assets/images/banner.png'
 import Logo from './shared/Logo'
 import Button from './shared/Button'
 
 const Hero = () => {
+  const { isAuthenticated } = useAuth()
+
   return (
     <div className='relative'>
       <img className='w-full' src={banner} alt='banner' />
@@ -24,7 +28,7 @@ const Hero = () => {
                 Search
               </Button>
             </Link>
-            <Link to='/signup'>
+            <Link className={`${isAuthenticated ? 'hidden' : ''}`} to='/signup'>
               <Button>Sign Up</Button>
             </Link>
           </div>
