@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import cn from '../utils/class-names'
-import Logo from './Logo'
+import Logo from './shared/Logo'
 import { ReactComponent as PawIcon } from '../assets/images/logo.svg'
 import Overlay from './shared/Overlay'
 import { useAuth } from '../context/authContext'
@@ -12,7 +12,7 @@ export const Navbar = () => {
   const { isAuthenticated } = useAuth()
 
   return (
-    <header className='w-full absolute z-10'>
+    <header className='absolute z-10 w-full'>
       <MenuButton onClick={() => setShow(prev => !prev)} />
       {
         <nav>
@@ -36,14 +36,14 @@ export const Navbar = () => {
 const MenuButton = ({ onClick }) => (
   <button
     onClick={onClick}
-    className='focus:outline-none focus:text-green-50 text-green-800 sm:hidden'
+    className='text-green-800 focus:outline-none focus:text-green-50 sm:hidden'
   >
-    <PawIcon className='h-6 w-6 fill-current m-2' />
+    <PawIcon className='w-6 h-6 m-2 fill-current' />
   </button>
 )
 
 const NavLogo = () => (
-  <div className='w-full flex justify-center sm:justify-start'>
+  <div className='flex justify-center w-full sm:justify-start'>
     <Link to='/'>
       <Logo />
     </Link>
@@ -61,7 +61,7 @@ const NavLinks = ({ isAuthenticated }) => (
       <li className='group'>
         <Link to='/search'>
           Search
-          <div className='h-1 transition transform scale-x-0 group-hover:scale-x-100 bg-green-800' />
+          <div className='h-1 transition transform scale-x-0 bg-green-800 group-hover:scale-x-100' />
         </Link>
       </li>
 
@@ -69,12 +69,12 @@ const NavLinks = ({ isAuthenticated }) => (
         {isAuthenticated ? (
           <Link to='/logout'>
             Logout
-            <div className='h-1 transition transform scale-x-0 group-hover:scale-x-100 bg-green-800' />
+            <div className='h-1 transition transform scale-x-0 bg-green-800 group-hover:scale-x-100' />
           </Link>
         ) : (
           <Link to='/login'>
             Login
-            <div className='h-1 transition transform scale-x-0 group-hover:scale-x-100 bg-green-800' />
+            <div className='h-1 transition transform scale-x-0 bg-green-800 group-hover:scale-x-100' />
           </Link>
         )}
       </li>
