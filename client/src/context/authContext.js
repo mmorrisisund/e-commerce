@@ -25,6 +25,7 @@ const AuthProvider = ({ children }) => {
       const user = await signupUser(email, password, passwordConfirm)
       setUser(user)
       setIsAuthenticated(true)
+      setError('')
     } catch (error) {
       setError(error.message)
     }
@@ -35,6 +36,7 @@ const AuthProvider = ({ children }) => {
       const user = await loginUser(email, password)
       setUser(user)
       setIsAuthenticated(true)
+      setError('')
     } catch (error) {
       setError(error.message)
     }
