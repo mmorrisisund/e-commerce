@@ -10,6 +10,7 @@ const Home = lazy(() => import('../pages/Home'))
 const Login = lazy(() => import('../pages/Login'))
 const Logout = lazy(() => import('../pages/Logout'))
 const Signup = lazy(() => import('../pages/Signup'))
+const Search = lazy(() => import('../pages/Search'))
 
 const App = () => (
   <Suspense fallback={<p>Loading...</p>}>
@@ -22,6 +23,7 @@ const App = () => (
               <Route path='/login' component={Login} />
               <Route path='/logout' component={Logout} />
               <Route path='/signup' component={Signup} />
+              <Route path='/search' component={Search} />
             </Switch>
           </AppShell>
         </AuthProvider>
