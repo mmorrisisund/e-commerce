@@ -3,11 +3,11 @@ import { Navbar } from './Navbar'
 
 const AppShell = ({ children }) => {
   return (
-    <>
+    <div className='flex flex-col'>
       <Navbar />
-      {children}
+      <div className='flex-grow'>{children}</div>
       <Footer />
-    </>
+    </div>
   )
 }
 
