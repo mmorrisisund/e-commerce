@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { checkUser, loginUser, logoutUser } from '../services/auth'
+import { checkUser, loginUser, logoutUser, signupUser } from '../services/auth'
 
 const AuthContext = createContext()
 
@@ -19,6 +19,16 @@ const AuthProvider = ({ children }) => {
     }
     getUser()
   }, [])
+
+  const signup = async ({ email, password, passwordConfirm }) => {
+    try {
+      const user = await signupUser(email, password, passwordConfirm)
+      setUser(user)
+      setIsAuthenticated(true)
+    } catch (error) {
+      setError(error.message)
+    }
+  }
 
   const login = async ({ email, password }) => {
     try {
@@ -47,7 +57,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, user, error, login, logout }}
+      value={{ isAuthenticated, user, error, signup, login, logout }}
     >
       {children}
     </AuthContext.Provider>

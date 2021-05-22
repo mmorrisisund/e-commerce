@@ -6,6 +6,20 @@ export const checkUser = async () => {
   return data.data.user
 }
 
+export const signupUser = async (email, password, passwordConfirm) => {
+  const { data } = await http.post('/auth/signup', {
+    email,
+    password,
+    passwordConfirm,
+  })
+
+  if (data.status === 'success') {
+    return data.data.user
+  } else {
+    throw new Error(data.data.message)
+  }
+}
+
 export const loginUser = async (email, password) => {
   const { data } = await http.post('/auth/login', { email, password })
 
