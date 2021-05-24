@@ -2,13 +2,20 @@ import { useState } from 'react'
 
 import PopOver from './PopOver'
 
-const InputRange = ({ min = 0, max = 100, step = 1, initialValue = 0 }) => {
+const InputRange = ({
+  min = 0,
+  max = 100,
+  step = 1,
+  initialValue = 0,
+  onChange,
+}) => {
   const [value, setValue] = useState(initialValue)
-  const [fillWidth, setFillWidth] = useState(initialValue / max)
+  const [fillWidth, setFillWidth] = useState((initialValue / max) * 100)
 
   const handleOnChange = e => {
     setValue(e.target.value)
     setFillWidth((e.target.value / max) * 100)
+    onChange?.(e.target.value)
   }
 
   return (
