@@ -13,7 +13,7 @@ const PopOver = ({ className, children, style }) => {
   return (
     <div
       className={cn([
-        'relative transition-opacity opacity-0 group-hover:opacity-100',
+        'relative transition-opacity opacity-0 group-hover:opacity-100 touch:opacity-100',
         className,
       ])}
       style={style}
