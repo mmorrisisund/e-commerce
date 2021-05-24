@@ -9,6 +9,7 @@ module.exports = {
       '2xs': '320px',
       xs: '480px',
       ...defaultTheme.screens,
+      touch: { raw: '(hover: none) and (pointer: coarse)' },
     },
     extend: {
       colors: {
