@@ -25,7 +25,11 @@ const Button = ({ children, variant = 'primary', size = 'md', ...rest }) => {
   return (
     <button
       {...rest}
-      className={cn('rounded transition-colors', SIZE[size], VARIANT[variant])}
+      className={cn(
+        'rounded transition-colors w-full',
+        SIZE[size],
+        VARIANT[variant]
+      )}
     >
       {children}
     </button>
