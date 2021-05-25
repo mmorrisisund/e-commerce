@@ -4,7 +4,7 @@ const VARIANT = {
   primary: [
     'bg-green-800 text-green-50 border-2 border-transparent',
     'active:focus:bg-green-800 active:focus:text-green-50',
-    'hover:bg-green-50 hover:text-green-800',
+    'hover:bg-green-50 hover:text-green-800 hover:border-2 hover:border-green-800',
     'focus:outline-none',
   ],
   secondary: [
