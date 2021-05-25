@@ -11,6 +11,7 @@ const Login = lazy(() => import('../pages/Login'))
 const Logout = lazy(() => import('../pages/Logout'))
 const Signup = lazy(() => import('../pages/Signup'))
 const Search = lazy(() => import('../pages/Search'))
+const Pet = lazy(() => import('../pages/Pet'))
 
 const App = () => (
   <Suspense fallback={<p>Loading...</p>}>
@@ -24,6 +25,7 @@ const App = () => (
               <Route path='/logout' component={Logout} />
               <Route path='/signup' component={Signup} />
               <Route path='/search' component={Search} />
+              <Route path='/pets/:petId' component={Pet} />
             </Switch>
           </AppShell>
         </AuthProvider>
