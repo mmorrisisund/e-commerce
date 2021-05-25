@@ -33,3 +33,8 @@ export const getPets = async ({
 
   return data.data.pets
 }
+
+export const getPetById = async id => {
+  const { data } = await http.post('/pets/single', { id })
+  return data.data.pet
+}
