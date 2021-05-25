@@ -51,6 +51,7 @@ const Search = () => {
             <RadioGroup.Label>What kind of pet do you want?</RadioGroup.Label>
             {TYPES.map(petType => (
               <RadioGroup.Option
+                key={petType}
                 value={petType}
                 className='mt-4 cursor-pointer focus:outline-none'
               >
